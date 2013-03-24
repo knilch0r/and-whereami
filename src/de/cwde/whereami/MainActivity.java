@@ -5,10 +5,17 @@ import com.larvalabs.svgandroid.SVGParser;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -35,13 +42,51 @@ public class MainActivity extends Activity {
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_settings:
-			// todo
+			displaySettings();
 			return true;
 		case R.id.action_about:
-			// to do
+			displayAbout();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	private void displayAbout() {
+		PackageInfo pInfo;
+		try {
+			pInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
+			String appname = getString(R.string.app_name);
+			String aboutTitle = "About " + appname;
+			String versionString = appname + " "+ pInfo.versionName;
+			String aboutText = getString(R.string.aboutText);
+
+			final TextView message = new TextView(this);
+			final SpannableString s = new SpannableString(aboutText);
+
+			message.setPadding(5, 5, 5, 5);
+			message.setText(versionString + s);
+			Linkify.addLinks(message, Linkify.ALL);
+
+			new AlertDialog.Builder(this)
+			.setTitle(aboutTitle)
+			.setCancelable(true)
+			.setIcon(R.drawable.ic_launcher)
+			.setPositiveButton(android.R.string.ok, null)
+			.setView(message).create()
+			.show();
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void displaySettings() {
+		new AlertDialog.Builder(this)
+		.setTitle(R.string.action_settings)
+		.setMessage(R.string.nosettingsyet)
+		.setCancelable(true)
+		.setPositiveButton(android.R.string.ok, null)
+		.create().show();
 	}
 }

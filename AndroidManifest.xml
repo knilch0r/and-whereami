@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.cwde.whereami"
-    android:versionCode="1"
+    android:versionCode="2"
     android:versionName="0.1" >
 
     <uses-sdk
-        android:minSdkVersion="1"
+        android:minSdkVersion="4"
         android:targetSdkVersion="17" />
 
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" android:allowBackup="true">
         <activity
             android:name="de.cwde.whereami.MainActivity"
             android:label="@string/app_name" >

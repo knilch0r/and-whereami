@@ -3,7 +3,9 @@ package de.cwde.whereami;
 import com.larvalabs.svgandroid.SVG;
 import com.larvalabs.svgandroid.SVGParser;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.pm.PackageInfo;
@@ -12,13 +14,16 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,6 +31,10 @@ public class MainActivity extends Activity {
 		ImageView imageView = (ImageView) findViewById(R.id.imageView);
 		imageView.setBackgroundColor(Color.WHITE);
 		// Parse the SVG file, using svg-android
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			Log.d("view", "disabling hw acceleration");
+			imageView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+		}
 		SVG svg = SVGParser.getSVGFromResource(getResources(), R.raw.x);
 		imageView.setImageDrawable(svg.createPictureDrawable());
 	}
@@ -78,7 +87,7 @@ public class MainActivity extends Activity {
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	private void displaySettings() {

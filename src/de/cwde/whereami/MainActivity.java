@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.graphics.Color;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 public class MainActivity extends Activity {
@@ -16,11 +17,9 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		ImageView imageView = (ImageView) findViewById(R.id.imageView);
-		// Set the background color to white
 		imageView.setBackgroundColor(Color.WHITE);
-		// Parse the SVG file from the resource
-		SVG svg = SVGParser.getSVGFromResource(getResources(), R.raw.android);
-		// Get a drawable from the parsed SVG and set it as the drawable for the ImageView
+		// Parse the SVG file, using svg-android
+		SVG svg = SVGParser.getSVGFromResource(getResources(), R.raw.x);
 		imageView.setImageDrawable(svg.createPictureDrawable());
 	}
 
@@ -31,4 +30,18 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+		case R.id.action_settings:
+			// todo
+			return true;
+		case R.id.action_about:
+			// to do
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 }

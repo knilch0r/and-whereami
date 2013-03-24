@@ -1,12 +1,11 @@
 package de.cwde.whereami;
 
+import com.larvalabs.svgandroid.SVG;
+import com.larvalabs.svgandroid.SVGParser;
+
 import android.os.Bundle;
 import android.app.Activity;
-import android.graphics.CornerPathEffect;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.PathShape;
+import android.graphics.Color;
 import android.view.Menu;
 import android.widget.ImageView;
 
@@ -16,27 +15,13 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		ImageView i = (ImageView) findViewById(R.id.imageView);
-		Path p = new Path();
-		p.moveTo(1, 0);
-		p.lineTo(3, 2);
-		p.lineTo(5, 0);
-		p.lineTo(6, 1);
-		p.lineTo(4, 3);
-		p.lineTo(6, 5);
-		p.lineTo(5, 6);
-		p.lineTo(3, 4);
-		p.lineTo(1, 6);
-		p.lineTo(0, 5);
-		p.lineTo(2, 3);
-		p.lineTo(0, 1);
-		p.lineTo(1, 0);
-		PathShape ps = new PathShape(p, 6, 6);
-		ShapeDrawable s = new ShapeDrawable(ps);
-		Paint pt = s.getPaint();
-		pt.setColor(0x0000eb);
-		pt.setPathEffect(new CornerPathEffect((float) 0.1));
-		i.setImageDrawable(s);
+		ImageView imageView = (ImageView) findViewById(R.id.imageView);
+		// Set the background color to white
+		imageView.setBackgroundColor(Color.WHITE);
+		// Parse the SVG file from the resource
+		SVG svg = SVGParser.getSVGFromResource(getResources(), R.raw.android);
+		// Get a drawable from the parsed SVG and set it as the drawable for the ImageView
+		imageView.setImageDrawable(svg.createPictureDrawable());
 	}
 
 	@Override

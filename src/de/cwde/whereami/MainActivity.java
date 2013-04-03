@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 		imageView.setBackgroundColor(Color.WHITE);
 		// Parse the SVG file, using svg-android
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			Log.d("view", "disabling hw acceleration");
+			Log.d("MainActivity", "disabling hw acceleration");
 			imageView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 		}
 		SVG svg = SVGParser.getSVGFromResource(getResources(), R.raw.x);

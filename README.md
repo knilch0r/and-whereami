@@ -7,4 +7,4 @@ Yes, you've got that fancy smartphone, with built-in GPS receivers and Google Ma
 
 This zen-like app does. And it doesn't even need a GPS receiver.
 
-`this once was https://code.google.com/p/and-whereami/`
+This once was located at `https://code.google.com/p/and-whereami/`.
